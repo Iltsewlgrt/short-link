@@ -33,7 +33,7 @@ async function fetchGeo(ip) {
     return null;
   }
 
-  const payload = await response.json();
+  const payload: any = await response.json();
   if (payload.status !== "success") {
     return null;
   }
@@ -54,7 +54,7 @@ async function fetchGeoFallback(ip) {
     return null;
   }
 
-  const payload = await response.json();
+  const payload: any = await response.json();
   if (!payload.success) {
     return null;
   }
@@ -66,7 +66,7 @@ async function fetchGeoFallback(ip) {
   };
 }
 
-async function resolveFromProviders(ip) {
+async function resolveFromProviders(ip?) {
   const primary = await fetchGeo(ip);
   if (primary) {
     return primary;

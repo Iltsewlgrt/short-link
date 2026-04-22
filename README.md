@@ -23,11 +23,11 @@
 
 - `backend/` — Express API, редиректы и сбор аналитики.
 - `frontend/` — React + Redux Toolkit, формы, таблица и графики.
-- Хранилище на backend: `backend/src/data/db.json`.
+- Хранилище на backend: PostgreSQL + Prisma ORM.
 
 Backend слои:
 
-- `backend/src/routes/` — только маршрутизация (`routes/index.js`, `routes/apiRoutes.js`, `routes/redirectRoutes.js`).
+- `backend/src/routes/` — только маршрутизация (`routes/index.ts`, `routes/apiRoutes.ts`, `routes/redirectRoutes.ts`).
 - `backend/src/controllers/` — работа с `req/res`, HTTP-ответы и статусы.
 - `backend/src/services/` — бизнес-логика без `req/res`.
 - `backend/src/middleware/` — cross-cutting middleware (логирование, обработка ошибок).
@@ -43,6 +43,7 @@ Backend:
 
 - BASE_URL: базовый домен коротких ссылок и ссылки статистики (формат /shortCode и /shortCode+)
 - FRONTEND_BASE_URL: базовый домен UI статистики (редирект на /#/stats/shortCode)
+- DATABASE_URL: строка подключения к PostgreSQL для Prisma
 
 Frontend:
 
@@ -52,6 +53,7 @@ Frontend:
 
 - BASE_URL=http://localhost:4000
 - FRONTEND_BASE_URL=http://localhost:5173
+- DATABASE_URL=postgresql://postgres:postgres@localhost:5432/linktd?schema=public
 - VITE_API_URL=http://localhost:4000/api
 
 При деплое (пример):
@@ -60,14 +62,27 @@ Frontend:
 - FRONTEND_BASE_URL=https://app.your-domain.com
 - VITE_API_URL=https://api.your-domain.com/api
 
+### PostgreSQL через Docker
+
+Из корня проекта:
+
+```bash
+npm run db:up
+npm run db:push
+```
+
+`db:up` поднимает PostgreSQL в Docker, `db:push` создает/обновляет таблицы Prisma.
+
 ### Быстрый запуск из корня
 
 Из корня проекта:
 
 npm install
+npm run db:up
+npm run db:push
 npm run dev
 
-Команда поднимет одновременно backend и frontend.
+Команда `dev` поднимет одновременно backend и frontend.
 
 ### Публичные ссылки для внешней проверки статистики
 

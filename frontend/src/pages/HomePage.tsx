@@ -1,14 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { FormEvent } from "react";
 import { clearCreatedLink, createShortLink } from "../store/linksSlice";
+import { useAppDispatch, useAppSelector } from "../store";
 
 function HomePage() {
   const [url, setUrl] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
-  const dispatch = useDispatch();
-  const { loading, error, createdLink } = useSelector((state) => state.links);
+  const dispatch = useAppDispatch();
+  const { loading, error, createdLink } = useAppSelector((state) => state.links);
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await dispatch(createShortLink(url));
   };

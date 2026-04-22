@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchStats } from "../api/client";
 
-export const loadStats = createAsyncThunk("stats/load", async (statsCode) => {
+export const loadStats = createAsyncThunk("stats/load", async (statsCode: string) => {
   const result = await fetchStats(statsCode);
   return result;
 });

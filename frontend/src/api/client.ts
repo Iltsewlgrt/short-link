@@ -11,7 +11,7 @@ function normalizeApiBase(rawBase) {
 
 const API_BASE = normalizeApiBase(import.meta.env.VITE_API_URL);
 
-async function request(path, options = {}) {
+async function request(path: string, options: RequestInit = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ async function request(path, options = {}) {
     ...options,
   });
 
-  const payload = await response.json().catch(() => ({}));
+  const payload: any = await response.json().catch(() => ({}));
 
   if (!response.ok) {
     throw new Error(payload.message || `Request failed (${response.status})`);
@@ -29,13 +29,13 @@ async function request(path, options = {}) {
   return payload;
 }
 
-export async function createLink(url) {
+export async function createLink(url: string) {
   return request("/links", {
     method: "POST",
     body: JSON.stringify({ url }),
   });
 }
 
-export async function fetchStats(shortCode) {
+export async function fetchStats(shortCode: string) {
   return request(`/stats/by-short/${shortCode}`);
 }

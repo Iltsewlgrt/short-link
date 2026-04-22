@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createLink } from "../api/client";
 
-export const createShortLink = createAsyncThunk("links/create", async (url) => {
+export const createShortLink = createAsyncThunk("links/create", async (url: string) => {
   const result = await createLink(url);
   return result;
 });

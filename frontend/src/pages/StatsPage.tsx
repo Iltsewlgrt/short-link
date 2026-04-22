@@ -1,15 +1,15 @@
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { loadStats } from "../store/statsSlice";
 import ClicksTable from "../components/ClicksTable";
 import BarChart from "../components/BarChart";
 import { aggregateByBrowser, aggregateByRegion } from "../utils/stats";
+import { useAppDispatch, useAppSelector } from "../store";
 
 function StatsPage() {
   const { shortCode } = useParams();
-  const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.stats);
+  const dispatch = useAppDispatch();
+  const { loading, error, data } = useAppSelector((state) => state.stats);
 
   useEffect(() => {
     if (shortCode) {

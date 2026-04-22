@@ -6,6 +6,9 @@
     "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:push": "npm --prefix backend run prisma:push",
     "stop": "kill-port 4000 5173",
     "build": "npm --prefix frontend run build",
     "start": "npm --prefix backend run start"

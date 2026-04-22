@@ -11,7 +11,7 @@ function startServer() {
       retries = 0;
       console.log(`Backend is running on port ${config.port}`);
     })
-    .on("error", (error) => {
+    .on("error", (error: any) => {
       if (error?.code === "EADDRINUSE" && retries < SERVER_STARTUP_RETRY_MAX) {
         retries += 1;
         console.warn(
